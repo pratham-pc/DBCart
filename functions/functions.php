@@ -177,11 +177,13 @@ function getBrandPro(){
 		
 		while($p_price=mysqli_fetch_array($run_price)){
 			$pro_id = $p_price['p_id'];
+			$pro_qty = $p_price['qty'];
 			$pro_price = "select * from products where product_id='$pro_id'";
 			$run_pro_price = mysqli_query($con, $pro_price);
 			while($pp_price = mysqli_fetch_array($run_pro_price)){
 				$product_price = array($pp_price['product_price']);
 				$values = array_sum($product_price);
+				$values *= $pro_qty;
 				$total += $values;
 			}
 		}
