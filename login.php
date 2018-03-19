@@ -10,7 +10,7 @@
 <body>  
 	<?php
 		if(isset($_POST['login']) && $_SERVER["REQUEST_METHOD"]=="POST"){
-			$sql_query = "select * from Customer where username = '".$_POST['username']."' and password = '".md5($_POST['pass'])."'";
+			$sql_query = "select * from customer where username = '".$_POST['username']."' and password = '".md5($_POST['pass'])."'";
 			
 			//$conn = new mysqli('localhost','root','','DBcart');
 			//if($conn->connect_error){die("Connection failed");}

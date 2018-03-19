@@ -26,12 +26,14 @@ function getIp() {
 			$run_check = mysqli_query($con, $check_pro);
 			
 			if(mysqli_num_rows($run_check)>0){
-				echo "";
+				echo "prathampc	";
 			}
 			else{
-				$insert_pro = "insert into cart (p_id,ip_add) values ('$pro_id','$ip')";
-				$run_pro = mysqli_query($con,$insert_pro);
-				echo "<script>window.open('index.php','_self')</script>";
+				$insert_pro = "insert into cart (p_id, ip_add, qty) values ($pro_id,'$ip', 1)";
+				if ($run_pro = mysqli_query($con,$insert_pro)) {
+					//echo "<script>window.open('index.php','_self')</script>";
+					echo "JHADASKJDs";
+				}
 			}
 		}
 	}

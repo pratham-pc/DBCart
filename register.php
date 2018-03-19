@@ -24,7 +24,7 @@
 			$c_state = $_POST['c_state'];
 			
 			move_uploaded_file($c_image_tmp,"customer/customer_images/".$c_image);
-			$sql_query = "insert into Customer values('".$c_username."', '".$c_name."', '".$c_pass."', '".$c_image."', '".$c_mobile."', '".$c_address."', '".$c_city."', '".$c_state."', '".$c_country."')";
+			$sql_query = "insert into customer values('".$c_username."', '".$c_name."', '".$c_pass."', '".$c_image."', '".$c_mobile."', '".$c_address."', '".$c_city."', '".$c_state."', '".$c_country."')";
 			
 			/*$conn = new mysqli('localhost','root','','DBcart');
 			if($conn->connect_error){die("Connection failed");}*/
