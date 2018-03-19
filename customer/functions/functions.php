@@ -1,6 +1,6 @@
 <?php
 
-$con = mysqli_connect("localhost","prathampc","qwerTY123$","dbcart");
+$con = mysqli_connect("localhost","root","","dbcart");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: ".mysqli_connect_error();
 }
@@ -29,7 +29,7 @@ function getIp() {
 				echo "";
 			}
 			else{
-				$insert_pro = "insert into cart (p_id,ip_add) values ('$pro_id','$ip')";
+				$insert_pro = "insert into cart values ('$pro_id','$ip',0)";
 				$run_pro = mysqli_query($con,$insert_pro);
 				echo "<script>window.open('index.php','_self')</script>";
 			}

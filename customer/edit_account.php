@@ -97,7 +97,7 @@
 						
 						<tr>
 							<td align="right">Address</td>
-							<td><textarea cols="15" rows="1" name="c_address" value="<?php echo $_SESSION['address'] ; ?>"></textarea></td>
+							<td><textarea cols="15" rows="1" name="c_address"><?php echo $_SESSION['address']; ?></textarea></td>
 						</tr>
 						
 						<tr>
@@ -151,15 +151,23 @@
 			$c_name = $_POST['c_name'];
 			$c_username = $_POST['c_username'];
 			
-			$c_image = $_FILES['c_image']['name'];
-			$c_image_tmp = $_FILES['c_image']['tmp_name'];
+			if($_FILES['c_image']['name']!=""){
+				$c_image = $_FILES['c_image']['name'];
+				$c_image_tmp = $_FILES['c_image']['tmp_name'];
+				move_uploaded_file($c_image_tmp,"customer_images/".$c_image);
+			}
+			else{
+				$c_image = $_SESSION['image'];
+			}
+			
+			
 			//$c_country = $_POST['c_country'];
 			$c_city = $_POST['c_city'];
 			$c_mobile = $_POST['c_mobile'];
 			$c_address = $_POST['c_address'];
 			$c_state = $_POST['c_state'];
 			
-			move_uploaded_file($c_image_tmp,"customer_images/".$c_image);
+			
 			
 			$update_c = "update customer set username='$c_username',name='$c_name',city='$c_city',state='$c_state',image='$c_image',mobile='$c_mobile',address='$c_address' where username='".$_SESSION['username']."'";
 			

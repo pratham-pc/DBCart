@@ -14,6 +14,7 @@
 	</tr>
 	<?php
 		include("includes/db.php");
+		global $con;
 		$get_c = "select * from customer";
 		$run_c = mysqli_query($con,$get_c);
 		$i=0;
@@ -31,7 +32,7 @@
 		<td><?php echo $c_name;?></td>
 		<td><?php echo $c_username;?></td>
 		<td><img src="../customer/customer_images/<?php echo $c_image;?>" width="60" height="60" /></td>
-		<td><a href="delete_customer.php?delete_c= <?php echo $c_username; ?>">Delete</a></td>
+		<td><a href="delete_customer.php?delete_c=<?php echo $c_username; ?>">Delete</a></td>
 
 	</tr>
 	<?php

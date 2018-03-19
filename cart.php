@@ -105,14 +105,6 @@
 							
 						?>
 						
-						<tr align="center">
-							<td><input type="checkbox" name="remove[]" value="<?php echo $pro_id; ?>"></td>
-							<td>
-								<?php echo $product_title; ?><br>
-								<img src="admin_area/product_images/<?php echo $product_image; ?>" width="60" height="60">
-							</td>
-							<td><input type="text" size="4" name="qty" value="<?php echo $_SESSION['qty']; ?>"></td>
-							
 							<?php
 								if(isset($_POST['update_cart'])){
 									$qty = $_POST['qty'];
@@ -122,6 +114,16 @@
 									$total = $total * $qty;
 								}
 							?>
+						
+						<tr align="center">
+							<td><input type="checkbox" name="remove[]" value="<?php echo $pro_id; ?>"></td>
+							<td>
+								<?php echo $product_title; ?><br>
+								<img src="admin_area/product_images/<?php echo $product_image; ?>" width="60" height="60">
+							</td>
+							<td><input type="text" size="4" name="qty" value="<?php if(isset($_SESSION['qty']))echo $_SESSION['qty']; ?>"></td>
+							
+							
 							
 							<td><?php echo "$".$single_price; ?></td>
 						</tr>
@@ -147,11 +149,13 @@
 					global $con;
 					$ip = getIp();
 					if(isset($_POST['update_cart'])){
-						foreach($_POST['remove'] as $remove_id){
-							$delete_product = "delete from cart where p_id='$remove_id' and ip_add='$ip'";
-							$run_delete = mysqli_query($con, $delete_product);
-							if($run_delete){
-								echo "<script>window.open('cart.php','_self')</script>";
+						if(isset($_POST['remove'])){
+							foreach($_POST['remove'] as $remove_id){
+								$delete_product = "delete from cart where p_id='$remove_id' and ip_add='$ip'";
+								$run_delete = mysqli_query($con, $delete_product);
+								if($run_delete){
+									echo "<script>window.open('cart.php','_self')</script>";
+								}
 							}
 						}
 					}
