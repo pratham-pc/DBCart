@@ -80,18 +80,23 @@
 							<th>Remove</th>
 							<th>Product(S)</th>
 							<th>Quantity</th>
+							<th>Single Price</th>
 							<th>Total Price</th>
 						</tr>
 						
 						<?php
 							$total = 0;
+							$total_cart_price = 0;
 							global $con;
 							$ip = getIp();
 							$sel_price = "select * from cart where ip_add='$ip'";
 							$run_price = mysqli_query($con, $sel_price);
+							$pro_id_arr = array();
 							
 							while($p_price=mysqli_fetch_array($run_price)){
 								$pro_id = $p_price['p_id'];
+								array_push($pro_id_arr, $pro_id);
+								$pro_qty = $p_price['qty'];
 								$pro_price = "select * from products where product_id='$pro_id'";
 								$run_pro_price = mysqli_query($con, $pro_price);
 								while($pp_price = mysqli_fetch_array($run_pro_price)){
@@ -100,6 +105,7 @@
 									$product_image = $pp_price['product_image'];
 									$single_price = $pp_price['product_price'];
 									$values = array_sum($product_price);
+									$total_price = $single_price * $pro_qty;
 									$total += $values;
 								
 							
@@ -107,11 +113,16 @@
 						
 							<?php
 								if(isset($_POST['update_cart'])){
-									$qty = $_POST['qty'];
-									$update_qty = "update cart set qty='$qty'";
-									$run_qty = mysqli_query($con, $update_qty);
-									$_SESSION['qty'] = $qty;
-									$total = $total * $qty;
+									for ($i = 0, $j = 0; $i < count($pro_id_arr) && $j < count($_POST['qty']); $i++, $j++) {
+										$qty = $_POST['qty'][$j];
+										$update_qty = "update cart set qty='$qty' where p_id='".$pro_id_arr[$i]."'";
+										$run_qty = mysqli_query($con, $update_qty);
+										$_SESSION['qty'] = $qty;
+										$total = $total * $qty;
+									}
+									if ($run_qty) {
+									echo "<script>window.open('cart.php','_self')</script>";
+									}
 								}
 							?>
 						
@@ -121,18 +132,21 @@
 								<?php echo $product_title; ?><br>
 								<img src="admin_area/product_images/<?php echo $product_image; ?>" width="60" height="60">
 							</td>
-							<td><input type="text" size="4" name="qty" value="<?php if(isset($_SESSION['qty']))echo $_SESSION['qty']; ?>"></td>
+							<td><input type="text" size="4" name="qty[]" value="<?php echo $pro_qty; ?>"></td>
 							
 							
 							
 							<td><?php echo "$".$single_price; ?></td>
+							<td><?php echo "$".$total_price; ?></td>
 						</tr>
 				
-						<?php } } ?>
+						<?php }
+							$total_cart_price += $total_price;
+						 } ?>
 						
 						<tr align="right">
 							<td colspan="4"><b>Sub Total</td>
-							<td colspan="4"><?php echo "$".$total; ?></td>
+							<td colspan="4"><?php echo "$".$total_cart_price; ?></td>
 						</tr>
 						
 						<tr align="center">
