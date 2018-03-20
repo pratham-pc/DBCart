@@ -145,7 +145,7 @@
 						 } ?>
 						
 						<tr align="right">
-							<td colspan="4"><b>Sub Total</td>
+							<td colspan="4"><b>STotal</td>
 							<td colspan="4"><?php echo "$".$total_cart_price; ?></td>
 						</tr>
 						
