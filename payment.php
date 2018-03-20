@@ -1,33 +1,165 @@
-<html>
-<head>
-<title>Payment Gateway</title>
-</head>
-<body>
-<div>
 <?php
-	include("includes/db.php");
+	session_start();
 	include("functions/functions.php");
-	$total = 0;
-	global $con;
-	$ip = getIp();
-	$sel_price = "select * from cart where ip_addr='$ip'";
-	$run_price = mysqli_query($con, $selprice);
-	while($p_price=mysqli_fetch_array($run_price)) {
-		$pro_id= $p_price['p_id'];
-		$pro_price = "select * from products where product_id='$pro_id'";
-		$run_pro_price = mysqli_query($con, $pro_price);
-		while($pp_price = mysql_fetch_array($runpro_price)) {
-			$product_price = array($pp_price['product_price']);
-			$product_id = $pp_price['product_id'];
-		 	$values = array_sum($product_price);
-			$total += $values;
-		}
-	}
 ?>
 
-<h2 align = "center">Pay using Cash on delivery method</h2>
-<h2><a href="payment_successful.php">Pay ₹<?php echo total_price(); ?> !</a></h2>
-<h2><a href = "payment_unsuccesful.php">Cancel</a></h2>
-</div>
-</body>
+<html>
+  <head>
+    <title> DBCart: Payment Gateway </title>
+    <link rel="stylesheet" href="styles/style.css" media="all">
+  </head>
+  <body>
+    <div class="main_wrapper">
+      <div class="header_wrapper">
+        <a href="index.php"><img id="logo" src="images/logo.png" ></a>
+        <img src="images/online_shop.jpg" id="banner" height="100px" width="500">
+      </div>
+
+      <div class="menubar">
+        <ul id="menu">
+          <li><a href="index.php">Home</a></li>
+          <li><a href="all_products.php">All Products</a></li>
+          <li><a href="customer/my_account.php">My Account</a></li>
+          <li><a href="cart.php">Cart</a></li>
+			<?php 
+				if(!isset($_SESSION['username'])){
+					echo '<li><a href="register.php">Sign Up</a></li>';
+				}	
+			?>
+        </ul>
+
+        <div id="form">
+          <form action="results.php" method="get" enctype="multipart/form-data">
+            <input type="text" name="user_query" placeholder="I am looking for">
+            <input type="submit" name="search" value="Search">
+          </form>
+        </div>
+      </div>
+
+      <div class="content_wrapper">
+        <div id="sidebar">
+          <div id="sidebar_title">Categories</div>
+          <ul id="cats">
+            <?php getCats(); ?>
+
+          </ul>
+          <div id="sidebar_title">Brands</div>
+          <ul id="cats">
+            <?php getBrands(); ?>
+          </ul>
+        </div>
+        <div id="content_area">
+			<?php cart(); ?>
+			<div id="shopping_cart">
+				<span style="float:right; font-size:18px; padding:5px; line-height:40px;">
+					<?php
+						if(isset($_SESSION['username'])){
+							echo 'Welcome '.$_SESSION['name'];
+						}
+						else{
+							echo 'Welcome Guest';
+						}
+					?>
+					<b style="color:black">Shopping Cart- </b> Items: <?php total_items(); ?> Price: <?php total_price(); ?> <a href="cart.php"
+					style="color:black;color:green;text-decoration:none;" >View Cart</a>
+					<?php 
+						if(isset($_SESSION['username'])){
+							echo '<a href="logout.php" style="color:black;color:green;text-decoration:none;" >Logout</a>';
+						}	
+						else{
+							echo '<a href="login.php" style="color:black;color:green;text-decoration:none;" >Login</a>';
+						}
+					?>
+				</span>
+			</div>
+			<div id = products_box>
+				<br>
+				<form action="payment.php" method="post" enctype="multipart/form-data">
+					<table align="center" width="700" bgcolor="skyblue">			
+						<tr align="center">
+							<th>Product(S)</th>
+							<th>Quantity</th>
+							<th>Single Price</th>
+							<th>Total Price</th>
+						</tr>
+						
+						<?php
+							$total = 0;
+							$total_cart_price = 0;
+							global $con;
+							$ip = getIp();
+							$sel_price = "select * from cart where ip_add='$ip'";
+							$run_price = mysqli_query($con, $sel_price);
+							$pro_id_arr = array();
+							
+							while($p_price=mysqli_fetch_array($run_price)){
+								$pro_id = $p_price['p_id'];
+								array_push($pro_id_arr, $pro_id);
+								$pro_qty = $p_price['qty'];
+								$pro_price = "select * from products where product_id='$pro_id'";
+								$run_pro_price = mysqli_query($con, $pro_price);
+								while($pp_price = mysqli_fetch_array($run_pro_price)){
+									$product_price = array($pp_price['product_price']);
+									$product_title = $pp_price['product_title'];
+									$product_image = $pp_price['product_image'];
+									$single_price = $pp_price['product_price'];
+									$values = array_sum($product_price);
+									$total_price = $single_price * $pro_qty;
+									$total += $values;
+								
+							
+						?>
+						
+						<tr align="center">
+							<td>
+								<?php echo $product_title; ?><br>
+								<img src="admin_area/product_images/<?php echo $product_image; ?>" width="60" height="60">
+							</td>
+							<td><?php echo $pro_qty; ?></td>
+							
+							
+							
+							<td><?php echo "₹".$single_price; ?></td>
+							<td><?php echo "₹".$total_price; ?></td>
+						</tr>
+				
+						<?php }
+							$total_cart_price += $total_price;
+						 } ?>
+						
+						<tr align="right">
+							<td colspan="4"><b>Total</td>
+							<td colspan="4"><?php echo "₹".$total_cart_price; ?></td>
+						</tr>
+						
+						<tr align="center">
+							<td><input type="submit" name="Back" value="Edit"></td>
+							<td><input type="submit" name="place" value="Place Order"></td>
+							
+						</tr>
+					</table>
+				</form>
+				
+				<?php
+					
+					global $con;
+					$ip = getIp();
+					if(isset($_POST['place'])){
+						echo "<script>window.open('payment_successful.php','_self')</script>";
+					}
+					
+					if(isset($_POST['Back'])){
+						echo "<script>window.open('cart.php','_self')</script>";
+					}
+						
+					
+				?>
+			</div>	 
+        </div>
+      </div>
+
+      <div id="footer"> <h2 style="text-align:center;padding-top:10px;">&copy; 2018 by dbcart.com </h2> </div>
+    </div>
+
+  </body>
 </html>
