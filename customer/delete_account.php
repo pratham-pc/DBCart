@@ -1,6 +1,6 @@
-<?php 
+<?php
 	session_start();
-	include("functions/functions.php"); 
+	include("functions/functions.php");
 ?>
 <html>
   <head>
@@ -11,6 +11,7 @@
     <div class="main_wrapper">
       <div class="header_wrapper">
         <a href="../index.php"><img id="logo" src="images/logo.png" ></a>
+				<img src="images/banner.png" id="banner1" height="100px" width="300">
         <img src="images/online_shop.jpg" id="banner" height="100px" width="500">
       </div>
 
@@ -20,10 +21,10 @@
           <li><a href="../all_products.php">All Products</a></li>
           <li><a href="my_account.php">My Account</a></li>
           <li><a href="../cart.php">Cart</a></li>
-			<?php 
+			<?php
 				if(!isset($_SESSION['username'])){
 					echo '<li><a href="../register.php">Sign Up</a></li>';
-				}	
+				}
 			?>
         </ul>
 
@@ -48,7 +49,7 @@
 			<li><a href="delete_account.php">Delete Account</a></li>
           </ul>
         </div>
-        <div id="content_area">	
+        <div id="content_area">
 			<?php cart(); ?>
 			<div id="shopping_cart">
 				<span style="float:right; font-size:18px; padding:5px; line-height:40px;">
@@ -57,11 +58,11 @@
 							echo 'Welcome '.$_SESSION['name'];
 						}
 					?>
-					
-					<?php 
+
+					<?php
 						if(isset($_SESSION['username'])){
 							echo '<a href="../logout.php" style="color:black;color:green;text-decoration:none;" >Logout</a>';
-						}	
+						}
 						else{
 							echo '<a href="../login.php" style="color:black;color:green;text-decoration:none;" >Login</a>';
 						}
@@ -86,11 +87,11 @@
 
   </body>
 </html>
-	
+
 	<?php
 		if($_SERVER["REQUEST_METHOD"]=="POST"){
 			//$ip = getIp();
-			
+
 			$user = $_SESSION['username'];
 			if(isset($_POST['yes'])){
 				$delete_customer="delete from customer where username = '$user'";

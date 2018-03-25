@@ -1,6 +1,6 @@
 <?php
 
-  $con = mysqli_connect("localhost","prathampc", "qwerTY123$","dbcart");
+  $con = mysqli_connect("localhost","root", "","dbcart");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: ".mysqli_connect_error();
 }
@@ -13,7 +13,7 @@ function getIp() {
 	} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
 	}
-	
+
 	return $ip;
 }
 
@@ -24,7 +24,7 @@ function getIp() {
 			$pro_id = $_GET['add_cart'];
 			$check_pro = "select * from cart where ip_add='$ip' AND p_id='$pro_id'";
 			$run_check = mysqli_query($con, $check_pro);
-			
+
 			if(mysqli_num_rows($run_check)>0){
 				echo "";
 			}
@@ -147,7 +147,7 @@ function getBrandPro(){
   }
 }
 }
-	
+
 	function total_items(){
 		/*No need of if and else because both if and else have same code content inside*/
 		if(isset($_GET['add_cart'])){
@@ -164,17 +164,17 @@ function getBrandPro(){
 			$run_items = mysqli_query($con, $get_items);
 			$count_items = mysqli_num_rows($run_items);
 		}
-		
+
 		echo $count_items;
 	}
-	
+
 	function total_price(){
 		$total = 0;
 		global $con;
 		$ip = getIp();
 		$sel_price = "select * from cart where ip_add='$ip'";
 		$run_price = mysqli_query($con, $sel_price);
-		
+
 		while($p_price=mysqli_fetch_array($run_price)){
 			$pro_id = $p_price['p_id'];
 			$pro_price = "select * from products where product_id='$pro_id'";
@@ -185,7 +185,7 @@ function getBrandPro(){
 				$total += $values;
 			}
 		}
-		
+
 		echo $total;
 	}
 

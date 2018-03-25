@@ -23,7 +23,7 @@ body{background-color: lavender}
   width: 1000px;
   height: auto;
   margin: auto;
-  background: silver;
+  background: darkgray;
 }
 
 .header_wrapper{
@@ -38,8 +38,9 @@ body{background-color: lavender}
   background: steelblue;
 }
 
-#logo {float:left; background-color: white; border-width: thick;border-color: black}
+#logo {float:left; background-color: white; border-width: thick;border-color: black ; height: 100px; width: 200px;}
 #banner {float: right;}
+#banner1 {background-color: white;}
 #menu {padding: 0;margin: 0;line-height: 50px;float: left;}
 #form {float: right;padding-right: 8px; line-height: 50px;}
 
@@ -67,7 +68,7 @@ body{background-color: lavender}
 }
 
 #content_area{  width: 800px; float: right; background-color: lightsteelblue;}
-#sidebar{ width: 200px; float: left;background-color: silver;}
+#sidebar{ width: 200px; float: left;background-color: darkgray;}
 #sidebar_title{background:darkslategray;color: white;font-size: 22px;font-family: arial;padding: 10px;text-align: center;}
 #cats{text-align: center;}
 #cats li{list-style: none; margin: 20px;display: block;}

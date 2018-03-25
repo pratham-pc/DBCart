@@ -1,6 +1,6 @@
-<?php 
+<?php
 	session_start();
-	include("functions/functions.php"); 
+	include("functions/functions.php");
 ?>
 <html>
   <head>
@@ -11,6 +11,7 @@
     <div class="main_wrapper">
       <div class="header_wrapper">
         <a href="index.php"><img id="logo" src="images/logo.png" ></a>
+				<img src="images/banner.png" id="banner1" height="100px" width="300">
         <img src="images/online_shop.jpg" id="banner" height="100px" width="500">
       </div>
 
@@ -20,10 +21,10 @@
           <li><a href="all_products.php">All Products</a></li>
           <li><a href="customer/my_account.php">My Account</a></li>
           <li><a href="cart.php">Cart</a></li>
-			<?php 
+			<?php
 				if(!isset($_SESSION['username'])){
 					echo '<li><a href="register.php">Sign Up</a></li>';
-				}	
+				}
 			?>
         </ul>
 
@@ -59,20 +60,20 @@
 							echo 'Welcome Guest';
 						}
 					?>
-					<b style="color:black">Shopping Cart- </b> Items: <?php total_items(); ?> Price: <?php total_price(); ?> 
+					<b style="color:black">Shopping Cart- </b> Items: <?php total_items(); ?> Price: <?php total_price(); ?>
 					<a href="cart.php" style="color:black;color:green;text-decoration:none;" >View Cart</a>
-					<?php 
+					<?php
 						if(isset($_SESSION['username'])){
 							echo '<a href="logout.php" style="color:black;color:green;text-decoration:none;" >Logout</a>';
-						}	
+						}
 						else{
-							echo '<a href="login.php" style="color:black;color:green;text-decoration:none;" >Login</a>';
+							echo '<a href="Login_v3/login.php" style="color:black;color:green;text-decoration:none;" >Login</a>';
 						}
 					?>
 				</span>
 			</div>
-			
-						
+
+
 			<div id="products_box">
 				<?php getPro(); ?>
 				<?php getCatPro(); ?>
