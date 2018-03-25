@@ -33,14 +33,14 @@
 				if(isset($_SESSION['checkout'])){
 					if($_SESSION['checkout']==1){
 						$_SESSION['checkout'] = 0;
-						header('Location: checkout.php');
+						echo "<script>window.open('/checkout.php','_self')</script>";
 					}
 					else{
-						header('Location: index.php');
+						echo "<script>window.open('/index.php','_self')</script>";
 					}
 				}
 				else{
-					header('Location: index.php');
+					echo "<script>window.open('/index.php','_self')</script>";
 				}
 			}
 			else{

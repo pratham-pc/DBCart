@@ -82,6 +82,7 @@
 							<th>Order - Time</th>
 							<th>Product(S)</th>
 							<th>Quantity</th>
+							<th>Order - Status</th>
 						</tr>
 
 						<?php
@@ -104,6 +105,7 @@
 								$order_id = $row_order['order_id'];
 								$pro_qty = $row_order['qty'];
 								$pro_date_time = $row_order['order_date_time'];
+								$pro_status = $row_order['status'];
 								?>
 
 						<tr align="center">
@@ -119,6 +121,9 @@
 							</td>
 							<td>
 								<?php echo $pro_qty; ?><br>
+							</td>
+							<td>
+								<?php echo $pro_status; ?><br>
 							</td>
 
 						</tr>

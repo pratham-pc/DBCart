@@ -69,6 +69,9 @@
 				if(isset($_GET['view_customers'])){
 					include("view_customers.php");
 				}
+				if(isset($_GET['view_orders'])){
+					include("view_orders.php");
+				}
 
 
 			?>
