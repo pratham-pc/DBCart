@@ -38,8 +38,9 @@ body{background-color: lavender}
   background: steelblue;
 }
 
-#logo {float:left; background-color: white; border-width: thick;border-color: black}
+#logo {float:left; background-color: white; border-width: thick;border-color: black ; height: 100px; width: 200px;}
 #banner {float: right;}
+#banner1 {background-color: white;}
 #menu {padding: 0;margin: 0;line-height: 50px;float: left;}
 #form {float: right;padding-right: 8px; line-height: 50px;}
 
@@ -68,11 +69,11 @@ body{background-color: lavender}
 }
 
 #content_area{  width: 800px; float: left; background-color: lightsteelblue;}
-#sidebar{ width: 200px; float: right;background-color: silver;}
+#sidebar{ width: 200px; float: right;background-color: seagreen;}
 #sidebar_title{background:darkslategray;color: white;font-size: 22px;font-family: arial;padding: 10px;text-align: center;}
 #cats{text-align: left;}
 #cats li{list-style: none; margin: 20px;}
-#cats a{color: orange; margin: 5px; padding: 8px; text-align: center; font-size: 17px;text-decoration: none;font-family: Comic Sans MS;}
+#cats a{color: white;font-weight: bold;margin: 0px; padding: 0px; text-align: center; font-size: 18px;text-decoration: none;font-family: Comic Sans MS;}
 #cats a:hover{font-weight: lighter;}
 #cats img {border:2px solid white; padding:4px;}
 

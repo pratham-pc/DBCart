@@ -12,6 +12,7 @@
     <div class="main_wrapper">
       <div class="header_wrapper">
         <a href="index.php"><img id="logo" src="images/logo.png" ></a>
+				<img src="images/banner.png" id="banner1" height="100px" width="300">
         <img src="images/online_shop.jpg" id="banner" height="100px" width="500">
       </div>
 
@@ -21,15 +22,15 @@
           <li><a href="/all_products.php">All Products</a></li>
           <li><a href="/customer/my_account.php">My Account</a></li>
           <li><a href="/cart.php">Cart</a></li>
-			<?php 
+			<?php
 				if(!isset($_SESSION['username'])){
 					echo '<li><a href="/register.php">Sign Up</a></li>';
-				}	
+				}
 			?>
         </ul>
 
         <div id="form">
-          <form action="results.php" method="get" enctype="multipart/form-data">
+          <form action="/results.php" method="get" enctype="multipart/form-data">
             <input type="text" name="user_query" placeholder="I am looking for">
             <input type="submit" name="search" value="Search">
           </form>
@@ -62,10 +63,10 @@
 					?>
 					<b style="color:black">Shopping Cart- </b> Items: <?php total_items(); ?> Price: <?php total_price(); ?> <a href="/cart.php"
 					style="color:black;color:green;text-decoration:none;" >View Cart</a>
-					<?php 
+					<?php
 						if(isset($_SESSION['username'])){
 							echo '<a href="/logout.php" style="color:black;color:green;text-decoration:none;" >Logout</a>';
-						}	
+						}
 						else{
 							echo '<a href="/login.php" style="color:black;color:green;text-decoration:none;" >Login</a>';
 						}
@@ -75,14 +76,14 @@
 			<div id = products_box>
 				<br>
 				<form action="my_orders.php" method="post" enctype="multipart/form-data">
-					<table align="center" width="700" bgcolor="skyblue">			
+					<table align="center" width="700" bgcolor="skyblue">
 						<tr align="center">
 							<th>Order - ID</th>
 							<th>Order - Time</th>
 							<th>Product(S)</th>
 							<th>Quantity</th>
 						</tr>
-						
+
 						<?php
 							$user = $_SESSION['username'];
 							$total = 0;
@@ -104,7 +105,7 @@
 								$pro_qty = $row_order['qty'];
 								$pro_date_time = $row_order['order_date_time'];
 								?>
-						
+
 						<tr align="center">
 							<td>
 								<?php echo $order_id; ?><br>
@@ -119,17 +120,17 @@
 							<td>
 								<?php echo $pro_qty; ?><br>
 							</td>
-							
+
 						</tr>
 							<?php }
 						  ?>
-				
-						
-						
+
+
+
 					</table>
 				</form>
-				
-			</div>	 
+
+			</div>
         </div>
       </div>
 

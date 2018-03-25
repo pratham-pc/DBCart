@@ -21,10 +21,10 @@
           <li><a href="all_products.php">All Products</a></li>
           <li><a href="customer/my_account.php">My Account</a></li>
           <li><a href="cart.php">Cart</a></li>
-			<?php 
+			<?php
 				if(!isset($_SESSION['username'])){
 					echo '<li><a href="register.php">Sign Up</a></li>';
-				}	
+				}
 			?>
         </ul>
 
@@ -62,10 +62,10 @@
 					?>
 					<b style="color:black">Shopping Cart- </b> Items: <?php total_items(); ?> Price: <?php total_price(); ?> <a href="cart.php"
 					style="color:black;color:green;text-decoration:none;" >View Cart</a>
-					<?php 
+					<?php
 						if(isset($_SESSION['username'])){
 							echo '<a href="logout.php" style="color:black;color:green;text-decoration:none;" >Logout</a>';
-						}	
+						}
 						else{
 							echo '<a href="login.php" style="color:black;color:green;text-decoration:none;" >Login</a>';
 						}
@@ -75,14 +75,14 @@
 			<div id = products_box>
 				<br>
 				<form action="payment.php" method="post" enctype="multipart/form-data">
-					<table align="center" width="700" bgcolor="skyblue">			
+					<table align="center" width="700" bgcolor="skyblue">
 						<tr align="center">
 							<th>Product(S)</th>
 							<th>Quantity</th>
 							<th>Single Price</th>
 							<th>Total Price</th>
 						</tr>
-						
+
 						<?php
 							$total = 0;
 							$total_cart_price = 0;
@@ -91,7 +91,7 @@
 							$sel_price = "select * from cart where ip_add='$ip'";
 							$run_price = mysqli_query($con, $sel_price);
 							$pro_id_arr = array();
-							
+
 							while($p_price=mysqli_fetch_array($run_price)){
 								$pro_id = $p_price['p_id'];
 								array_push($pro_id_arr, $pro_id);
@@ -106,55 +106,55 @@
 									$values = array_sum($product_price);
 									$total_price = $single_price * $pro_qty;
 									$total += $values;
-								
-							
+
+
 						?>
-						
+
 						<tr align="center">
 							<td>
 								<?php echo $product_title; ?><br>
 								<img src="admin_area/product_images/<?php echo $product_image; ?>" width="60" height="60">
 							</td>
 							<td><?php echo $pro_qty; ?></td>
-							
-							
-							
+
+
+
 							<td><?php echo "₹".$single_price; ?></td>
 							<td><?php echo "₹".$total_price; ?></td>
 						</tr>
-				
+
 						<?php }
 							$total_cart_price += $total_price;
 						 } ?>
-						
-						<tr align="right">
-							<td colspan="4"><b>Total</td>
-							<td colspan="4"><?php echo "₹".$total_cart_price; ?></td>
+
+						<tr align="center">
+							<td colspan="3" align="right"><b>Total</td>
+							<td colspan="3"><?php echo "₹".$total_cart_price; ?></td>
 						</tr>
-						
+
 						<tr align="center">
 							<td><input type="submit" name="Back" value="Edit"></td>
 							<td><input type="submit" name="place" value="Place Order"></td>
-							
+
 						</tr>
 					</table>
 				</form>
-				
+
 				<?php
-					
+
 					global $con;
 					$ip = getIp();
 					if(isset($_POST['place'])){
 						echo "<script>window.open('payment_successful.php','_self')</script>";
 					}
-					
+
 					if(isset($_POST['Back'])){
 						echo "<script>window.open('cart.php','_self')</script>";
 					}
-						
-					
+
+
 				?>
-			</div>	 
+			</div>
         </div>
       </div>
 

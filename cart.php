@@ -12,6 +12,7 @@
     <div class="main_wrapper">
       <div class="header_wrapper">
         <a href="index.php"><img id="logo" src="images/logo.png" ></a>
+				<img src="images/banner.png" id="banner1" height="100px" width="300">
         <img src="images/online_shop.jpg" id="banner" height="100px" width="500">
       </div>
 
@@ -21,10 +22,10 @@
           <li><a href="all_products.php">All Products</a></li>
           <li><a href="customer/my_account.php">My Account</a></li>
           <li><a href="cart.php">Cart</a></li>
-			<?php 
+			<?php
 				if(!isset($_SESSION['username'])){
 					echo '<li><a href="register.php">Sign Up</a></li>';
-				}	
+				}
 			?>
         </ul>
 
@@ -62,10 +63,10 @@
 					?>
 					<b style="color:black">Shopping Cart- </b> Items: <?php total_items(); ?> Price: <?php total_price(); ?> <a href="cart.php"
 					style="color:black;color:green;text-decoration:none;" >View Cart</a>
-					<?php 
+					<?php
 						if(isset($_SESSION['username'])){
 							echo '<a href="logout.php" style="color:black;color:green;text-decoration:none;" >Logout</a>';
-						}	
+						}
 						else{
 							echo '<a href="login.php" style="color:black;color:green;text-decoration:none;" >Login</a>';
 						}
@@ -75,7 +76,7 @@
 			<div id = products_box>
 				<br>
 				<form action="cart.php" method="post" enctype="multipart/form-data">
-					<table align="center" width="700" bgcolor="skyblue">			
+					<table align="center" width="700" bgcolor="skyblue">
 						<tr align="center">
 							<th>Remove</th>
 							<th>Product(S)</th>
@@ -83,7 +84,7 @@
 							<th>Single Price</th>
 							<th>Total Price</th>
 						</tr>
-						
+
 						<?php
 							$total = 0;
 							$total_cart_price = 0;
@@ -92,7 +93,7 @@
 							$sel_price = "select * from cart where ip_add='$ip'";
 							$run_price = mysqli_query($con, $sel_price);
 							$pro_id_arr = array();
-							
+
 							while($p_price=mysqli_fetch_array($run_price)){
 								$pro_id = $p_price['p_id'];
 								array_push($pro_id_arr, $pro_id);
@@ -107,10 +108,10 @@
 									$values = array_sum($product_price);
 									$total_price = $single_price * $pro_qty;
 									$total += $values;
-								
-							
+
+
 						?>
-						
+
 							<?php
 								if(isset($_POST['update_cart'])){
 									for ($i = 0, $j = 0; $i < count($pro_id_arr) && $j < count($_POST['qty']); $i++, $j++) {
@@ -125,7 +126,7 @@
 									}
 								}
 							?>
-						
+
 						<tr align="center">
 							<td><input type="checkbox" name="remove[]" value="<?php echo $pro_id; ?>"></td>
 							<td>
@@ -133,33 +134,33 @@
 								<img src="admin_area/product_images/<?php echo $product_image; ?>" width="60" height="60">
 							</td>
 							<td><input type="text" size="4" name="qty[]" value="<?php echo $pro_qty; ?>"></td>
-							
-							
-							
-							<td><?php echo "$".$single_price; ?></td>
-							<td><?php echo "$".$total_price; ?></td>
+
+
+
+							<td><?php echo "&#8377;".$single_price; ?></td>
+							<td><?php echo "&#8377;".$total_price; ?></td>
 						</tr>
-				
+
 						<?php }
 							$total_cart_price += $total_price;
 						 } ?>
-						
-						<tr align="right">
-							<td colspan="4"><b>STotal</td>
-							<td colspan="4"><?php echo "$".$total_cart_price; ?></td>
+
+						<tr align="center">
+							<td colspan="4" align="right"><b>Sub-Total</td>
+							<td colspan="4"><?php echo "&#8377;".$total_cart_price; ?></td>
 						</tr>
-						
+
 						<tr align="center">
 							<td colspan="2"><input type="submit" name="update_cart" value="Update Cart"></td>
 							<td><input type="submit" name="continue" value="Continue Shopping"></td>
 							<td><input type="submit" name="checkout" value="Checkout"></td>
-							
+
 						</tr>
 					</table>
 				</form>
-				
+
 				<?php
-					
+
 					global $con;
 					$ip = getIp();
 					if(isset($_POST['update_cart'])){
@@ -173,17 +174,17 @@
 							}
 						}
 					}
-					
+
 					if(isset($_POST['continue'])){
 						echo "<script>window.open('index.php','_self')</script>";
 					}
-						
+
 					if(isset($_POST['checkout'])){
 						header('Location: checkout.php');
 					}
-					
+
 				?>
-			</div>	 
+			</div>
         </div>
       </div>
 

@@ -6,20 +6,20 @@
 <head>
 	<title> DBCart </title>
     <link rel="stylesheet" href="styles/style.css" media="all">
-</head>   
-<body>  
+</head>
+<body>
 	<?php
 		if(isset($_POST['login']) && $_SERVER["REQUEST_METHOD"]=="POST"){
 			$sql_query = "select * from customer where username = '".$_POST['username']."' and password = '".md5($_POST['pass'])."'";
-			
+
 			//$conn = new mysqli('localhost','root','','DBcart');
 			//if($conn->connect_error){die("Connection failed");}
 
 			$result = mysqli_query($con, $sql_query);
-			
+
 			if(mysqli_num_rows($result)>0){
 				$row = mysqli_fetch_array($result);
-				
+
 				$_SESSION['username'] = $row['username'];
 				$_SESSION['name'] = $row['name'];
 				$_SESSION['image'] = $row['image'];
@@ -28,7 +28,7 @@
 				$_SESSION['city'] = $row['city'];
 				$_SESSION['state'] = $row['state'];
 				$_SESSION['country'] = $row['country'];
-				
+
 				echo "Login successful";
 				if(isset($_SESSION['checkout'])){
 					if($_SESSION['checkout']==1){
@@ -46,13 +46,14 @@
 			else{
 				echo "Login failed";
 			}
-			
+
 		}
 	?>
-	
+
 	<div class="main_wrapper">
       <div class="header_wrapper">
         <a href="index.php"><img id="logo" src="images/logo.png" ></a>
+				<img src="images/banner.png" id="banner1" height="100px" width="300">
         <img src="images/online_shop.jpg" id="banner" height="100px" width="500">
       </div>
 
@@ -62,10 +63,10 @@
           <li><a href="all_products.php">All Products</a></li>
           <li><a href="customer/my_account.php">My Account</a></li>
           <li><a href="cart.php">Cart</a></li>
-			<?php 
+			<?php
 				if(!isset($_SESSION['username'])){
 					echo '<li><a href="register.php">Sign Up</a></li>';
-				}	
+				}
 			?>
         </ul>
 
@@ -103,10 +104,10 @@
 					?>
 					<b style="color:black">Shopping Cart- </b> Items: <?php total_items(); ?> Price: <?php total_price(); ?> <a href="cart.php"
 					style="color:black;color:green;text-decoration:none;" >View Cart</a>
-					<?php 
+					<?php
 						if(isset($_SESSION['username'])){
 							echo '<a href="logout.php" style="color:black;color:green;text-decoration:none;" >Logout</a>';
-						}	
+						}
 						else{
 							echo '<a href="login.php" style="color:black;color:green;text-decoration:none;" >Login</a>';
 						}
@@ -119,17 +120,17 @@
 						<tr align="center">
 							<td colspan="6"><h2>Login or register to buy</h2></td>
 						</tr>
-						
+
 						<tr>
 							<td align="right">Username</td>
 							<td><input type="text" name="username" placeholder="enter username" required></td>
 						</tr>
-						
+
 						<tr>
 							<td align="right">Password</td>
 							<td><input type="password" name="pass" placeholder="enter password" required></td>
 						</tr>
-						
+
 						<tr align="center">
 							<td colspan="6"><input type="submit" name="login" value="Login"></td>
 						</tr>

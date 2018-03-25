@@ -1,4 +1,4 @@
-<?php 
+<?php
 	session_start();
 	if(!isset($_SESSION['user_email'])){
 		echo "<script>window.open('login.php?not_admin=You are not admin !','_self')</script>";
@@ -13,25 +13,29 @@
 <head>
 	<title></title>
 
-<link rel="stylesheet"  href="styles/style.css" media = "all" />	
+<link rel="stylesheet"  href="styles/style.css" media = "all" />
 </head>
 <body>
 	<div class = "main_wrapper">
-		<div id = "header"></div>
+		<div id = "header">
+			<a href="/index.php"><img id="logo" src="/images/logo.png" ></a>
+			<img src="/images/banner.png" id="banner1" height="100px" width="300">
+			<img src="/images/online_shop.jpg" id="banner" height="100px" width="500">
+		</div>
 		<div id="right">
 			<h2 style="text-align: center;">Manage Content</h2>
-			<a href="index.php?insert_product">Insert New Products</a>
-			<a href="index.php?view_products">View all products</a>
-			<a href="index.php?insert_cat">Insert New Category</a>
-			<a href="index.php?view_cats">View All Categories</a>
-			<a href="index.php?insert_brand">Insert New Brands</a>
-			<a href="index.php?view_brands">View All Brands</a>
-			<a href="index.php?view_customers">View Customers</a>
-			<a href="index.php?view_orders">View Orders</a>
-			<a href="index.php?view_payments">View Payments</a>
-			<a href="logout.php">Admin Logout</a>
+			<a href="index.php?insert_product" ><b>Insert New Products</b></a>
+			<a href="index.php?view_products"><b>View all products</b></a>
+			<a href="index.php?insert_cat"><b>Insert New Category</b></a>
+			<a href="index.php?view_cats"><b>View All Categories</b></a>
+			<a href="index.php?insert_brand"><b>Insert New Brands</b></a>
+			<a href="index.php?view_brands"><b>View All Brands</b></a>
+			<a href="index.php?view_customers"><b>View Customers</b></a>
+			<a href="index.php?view_orders"><b>View Orders</b></a>
+			<a href="index.php?view_payments"><b>View Payments</b></a>
+			<a href="logout.php"><b>Admin Logout</b></a>
 		</div>
-		<div id="left"> 
+		<div id="left">
 			<br><br>
 			<h2 style="color: red; text-align: center;"><?php echo @$_GET['logged_in'];?></h2>
 			<?php
@@ -65,11 +69,11 @@
 				if(isset($_GET['view_customers'])){
 					include("view_customers.php");
 				}
-				
+
 
 			?>
 		</div>
-		<
+
 </body>
 </html>
 
