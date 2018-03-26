@@ -19,8 +19,6 @@
 	<div class = "main_wrapper">
 		<div id = "header">
 			<a href="/index.php"><img id="logo" src="/images/logo.png" ></a>
-			<img src="/images/banner.png" id="banner1" height="100px" width="300">
-			<img src="/images/online_shop.jpg" id="banner" height="100px" width="500">
 		</div>
 		<div id="right">
 			<h2 style="text-align: center;">Manage Content</h2>

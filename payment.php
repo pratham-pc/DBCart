@@ -12,7 +12,6 @@
     <div class="main_wrapper">
       <div class="header_wrapper">
         <a href="index.php"><img id="logo" src="images/logo.png" ></a>
-        <img src="images/online_shop.jpg" id="banner" height="100px" width="500">
       </div>
 
       <div class="menubar">

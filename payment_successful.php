@@ -5,15 +5,13 @@
 
 <html>
   <head>
-    <title> DBCart: Payment Success! </title>
+    <title> DBCart: Order Success! </title>
     <link rel="stylesheet" href="styles/style.css" media="all">
   </head>
   <body>
     <div class="main_wrapper">
       <div class="header_wrapper">
         <a href="index.php"><img id="logo" src="images/logo.png" ></a>
-				<img src="images/banner.png" id="banner1" height="100px" width="300">
-        <img src="images/online_shop.jpg" id="banner" height="100px" width="500">
       </div>
 
       <div class="menubar">
@@ -149,7 +147,7 @@
 
 				<?php
 
-					echo "<h2>Welcome:" .$_SESSION['customer_email']."\nYour Payment was successful, please go to your account</h2>";
+					echo "<h2>Welcome:" .$_SESSION['customer_email']."\nYour order was successfully placed. Order payment is Cash on delivery.</h2>";
 					echo "<h3><a href='customer/my_account.php'>Go to your account</h3>";
 				?>
 			</div>
