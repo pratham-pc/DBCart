@@ -77,10 +77,10 @@
 				<?php
 					if(!isset($_SESSION['username'])){
 						$_SESSION['checkout'] = 1;
-						header("Location: login.php");
+						echo "<script>window.open('/Login_v3/login.php','_self')</script>";
 					}
 					else{
-						header("Location: payment.php");
+						echo "<script>window.open('/payment.php','_self')</script>";
 					}
 				?>
 			</div>

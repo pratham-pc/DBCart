@@ -49,9 +49,9 @@
 			$c_address = $_POST['c_address'];
 			$c_state = $_POST['c_state'];
 
-			move_uploaded_file($c_image_tmp,"customer/customer_images/".$c_image);
+			move_uploaded_file($c_image_tmp,"../customer/customer_images/".$c_image);
 			$sql_query = "insert into customer values('".$c_username."', '".$c_name."', '".$c_pass."', '".$c_image."', '".$c_mobile."', '".$c_address."', '".$c_city."', '".$c_state."', '".$c_country."')";
-
+			
 			/*$conn = new mysqli('localhost','root','','DBcart');
 			if($conn->connect_error){die("Connection failed");}*/
 
@@ -89,7 +89,7 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" method="post" action="registerv2.php" >
+				<form class="login100-form validate-form" method="post" action="register.php" enctype="multipart/form-data">
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
@@ -154,11 +154,18 @@
 					</div>				
 
 					<div class="container-login100-form-btn">
-						<button type="submit" class="login100-form-btn" name="register">
+					<button type="submit" class="login100-form-btn" name="register" value="Register">
 							Register
 						</button>
 					</div>
+					
+					<br>
 				</form>
+				<div class="container-login100-form-btn">
+					<a href="/index.php"><button class="login100-form-btn" name="home">
+						Home
+					</button></a>
+				</div>
 			</div>
 		</div>
 	</div>

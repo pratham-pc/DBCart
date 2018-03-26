@@ -180,7 +180,7 @@
 					}
 
 					if(isset($_POST['checkout'])){
-						header('Location: checkout.php');
+						echo "<script>window.open('/checkout.php','_self')</script>";
 					}
 
 				?>

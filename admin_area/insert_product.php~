@@ -92,6 +92,8 @@
     $insert_product = "insert into products (product_cat,product_brand,product_title,product_price,product_desc,product_image,product_keywords)
     values ('$product_cat','$product_brand','$product_title','$product_price','$product_desc','$product_image','$product_keywords')";
 	
+	echo "query is ".$insert_product;
+	
     $insert_pro = mysqli_query($con,$insert_product);
     if($insert_pro){
       echo "<script>alert('Product has been inserted!')</script>";

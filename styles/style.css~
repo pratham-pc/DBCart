@@ -63,7 +63,7 @@ body{background-color: lavender}
 .content_wrapper{
   width: 1000px;
   margin: auto;
-  background-color: lightsteelblue;
+  
 }
 
 #content_area{  width: 800px; float: right; background-color: lightsteelblue;}

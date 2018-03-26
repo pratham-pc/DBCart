@@ -23,7 +23,7 @@
           <li><a href="cart.php">Cart</a></li>
 			<?php
 				if(!isset($_SESSION['username'])){
-					echo '<li><a href="register.php">Sign Up</a></li>';
+					echo '<li><a href="Registration/register.php">Sign Up</a></li>';
 				}
 			?>
         </ul>
@@ -86,7 +86,7 @@
 
               echo " <div id='single_product'>
                       <h4>$pro_title</h4>
-                      <img src='admin_area/product_images/$pro_image' width='180' height='180 border=bold'>
+                      <img src='admin_area/product_images/$pro_image' width='120' height='120 border=bold'>
                       <p><b>&#8377 $pro_price</b></p>
                       <a href='details.php?pro_id=$pro_id' style='float:left; text-decoration:none; color:black'>Details</a>
                       <a href='index.php?pro_id=$pro_id'><button style='float:right; font-weight:bold'>Add to Cart</button></a>

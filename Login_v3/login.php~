@@ -143,3 +143,23 @@
 
 </body>
 </html>
+
+<?php
+	
+	/*include("../includes/db.php");
+	if(isset($_POST['login'])){
+		$uname = ($_POST['username']);
+		$pass = ($_POST['pass']);
+		$sql_query = "select * from customer where username = '".$_POST['username']."' and password = '".md5($_POST['pass'])."'";
+		$run_user = mysqli_query($con , $sql_query);
+		$check_user = mysqli_num_rows($run_user);
+
+		if($check_user == 0){
+			echo "<script>alert('Password or username is wrong try Again')</script>";
+		}
+		else{
+			$_SESSION['username'] = $uname ;
+			echo "<script>window.open('../index.php?logged_in=You have successfully logged in !!!','_self')</script>";
+		}
+	}*/
+?>

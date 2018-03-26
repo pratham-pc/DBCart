@@ -119,8 +119,8 @@
 
 
 
-							<td><?php echo "₹".$single_price; ?></td>
-							<td><?php echo "₹".$total_price; ?></td>
+							<td><?php echo "&#8377;".$single_price; ?></td>
+							<td><?php echo "&#8377;".$total_price; ?></td>
 						</tr>
 
 						<?php }
@@ -129,7 +129,7 @@
 
 						<tr align="center">
 							<td colspan="3" align="right"><b>Total</td>
-							<td colspan="3"><?php echo "₹".$total_cart_price; ?></td>
+							<td colspan="3"><?php echo "&#8377;".$total_cart_price; ?></td>
 						</tr>
 
 						<tr align="center">
