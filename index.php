@@ -19,11 +19,11 @@
         <ul id="menu">
           <li><a href="index.php">Home</a></li>
           <li><a href="all_products.php">All Products</a></li>
-          <li><a href="customer/my_account.php">My Account</a></li>
+          <?php if(isset($_SESSION['username'])){echo '<li><a href="customer/my_account.php">My Account</a></li>';}?>
           <li><a href="cart.php">Cart</a></li>
 			<?php
 				if(!isset($_SESSION['username'])){
-					echo '<li><a href="register.php">Sign Up</a></li>';
+					echo '<li><a href="Registration/register.php">Sign Up</a></li>';
 				}
 			?>
         </ul>

@@ -18,12 +18,12 @@
       <div class="menubar">
         <ul id="menu">
           <li><a href="index.php">Home</a></li>
-          <li><a href="customer/my_account.php">My Account</a></li>
           <li><a href="all_products.php">All Products</a></li>
+          <?php if(isset($_SESSION['username'])){echo '<li><a href="customer/my_account.php">My Account</a></li>';}?>
           <li><a href="cart.php">Cart</a></li>
 			<?php
 				if(!isset($_SESSION['username'])){
-					echo '<li><a href="register.php">Sign Up</a></li>';
+					echo '<li><a href="Registration/register.php">Sign Up</a></li>';
 				}
 			?>
         </ul>
@@ -67,7 +67,7 @@
 						echo '<a href="logout.php" style="color:black;color:green;text-decoration:none;" >Logout</a>';
 					}
 					else{
-						echo '<a href="login.php" style="color:black;color:green;text-decoration:none;" >Login</a>';
+						echo '<a href="Login_v3/login.php" style="color:black;color:green;text-decoration:none;" >Login</a>';
 					}
 				?>
             </span>

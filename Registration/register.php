@@ -1,0 +1,187 @@
+<?php
+	session_start();
+	include("../functions/functions.php");
+	include("../includes/db.php");
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Register</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	<?php
+		if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['register'])){
+			//$ip = getIp();
+
+			$c_name = $_POST['c_name'];
+			$c_username = $_POST['c_username'];
+			$c_pass = md5($_POST['c_pass']);
+			$c_image = $_FILES['c_image']['name'];
+			$c_image_tmp = $_FILES['c_image']['tmp_name'];
+			$c_country = $_POST['c_country'];
+			$c_city = $_POST['c_city'];
+			$c_mobile = $_POST['c_mobile'];
+			$c_address = $_POST['c_address'];
+			$c_state = $_POST['c_state'];
+
+			move_uploaded_file($c_image_tmp,"customer/customer_images/".$c_image);
+			$sql_query = "insert into customer values('".$c_username."', '".$c_name."', '".$c_pass."', '".$c_image."', '".$c_mobile."', '".$c_address."', '".$c_city."', '".$c_state."', '".$c_country."')";
+
+			/*$conn = new mysqli('localhost','root','','DBcart');
+			if($conn->connect_error){die("Connection failed");}*/
+
+			$result = mysqli_query($con, $sql_query);
+
+			if($result){
+				$_SESSION['username'] = $c_username;
+				$_SESSION['name'] = $c_name;
+				$_SESSION['image'] = $c_image;
+				$_SESSION['mobile'] = $c_mobile;
+				$_SESSION['address'] = $c_address;
+				$_SESSION['city'] = $c_city;
+				$_SESSION['state'] = $c_state;
+				$_SESSION['country'] = $c_country;
+				//echo "Registration successful";
+
+				if(isset($_SESSION['checkout'])){
+					if($_SESSION['checkout']==1){
+						$_SESSION['checkout'] = 0;
+						echo "<script>window.open('/checkout.php','_self')</script>";
+					}
+					else{
+						echo "<script>window.open('/index.php','_self')</script>";
+					}
+				}
+				else{
+					echo "<script>window.open('/index.php','_self')</script>";
+				}
+			}
+			else{
+				echo "Registration unsuccessful";
+			}
+		}
+	?>
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" method="post" action="registerv2.php" >
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27">
+						Sign Up
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" name="c_name" placeholder="Name" required>
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="text" name="c_username" placeholder="Username" required>
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+					
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="password" name="c_pass" placeholder="Password" required>
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
+					
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="file" name="c_image" required>
+						<span class="focus-input100" data-placeholder=""></span>
+					</div>
+					
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" name="c_mobile" placeholder="Mobile" required>
+						<span class="focus-input100" data-placeholder=""></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" cols="15" rows="1" name="c_address" placeholder="Address" required>
+						<span class="focus-input100" data-placeholder=""></span>
+					</div>
+					
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" name="c_city" placeholder="City" required>
+						<span class="focus-input100" data-placeholder=""></span>
+					</div>
+					
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" name="c_state" placeholder="State" required>
+						<span class="focus-input100" data-placeholder=""></span>
+					</div>
+					
+					<div>
+						<select name="c_country" class="wrap-input100 validate-input" data-validate = "Enter username">
+							<option>Algeria</option>
+							<option>Belgium</option>
+							<option>Canada</option>
+							<option>Denmark</option>
+							<option>Egypt</option>
+							<option>France</option>
+							<option>Germany</option>
+							<option>Hungary</option>
+							<option>India</option>
+							<option>Japan</option>
+						</select>
+					</div>				
+
+					<div class="container-login100-form-btn">
+						<button type="submit" class="login100-form-btn" name="register">
+							Register
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+</body>
+</html>
