@@ -82,7 +82,7 @@
 				}
 			}
 			else{
-				echo "Registration unsuccessful";
+				echo "<script>alert('username already exists or else enter a valid mobile number')</script> Registration unsuccessful";
 			}
 		}
 	?>
